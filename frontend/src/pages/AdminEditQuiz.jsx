@@ -22,6 +22,7 @@ function AdminEditQuiz () {
   const path = window.location.pathname;
   const quizId = path.replace('/quiz/', '');
 
+  // Navigates to Question Page
   const questionPage = (questionId) => {
     navigate('./' + questionId);
   }
@@ -32,6 +33,7 @@ function AdminEditQuiz () {
     });
   }, []);
 
+  // Creates all questions
   apiCall('admin/quiz/' + quizId, 'GET', {}, (data) => {
     const questionFeed = data.questions.map((question) => {
       const deleteQuestion = (questionId) => {
@@ -76,10 +78,12 @@ function AdminEditQuiz () {
     ReactDOM.render(questionFeed, document.getElementById('question-feed'));
   })
 
+  // Navigates to create/edit question page
   const createNewQuestion = () => {
     navigate(path + '/' + Date.now());
   }
 
+  // Navigates to dashboard
   const dashboardPage = () => {
     navigate('../dashboard');
   }

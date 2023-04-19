@@ -15,6 +15,7 @@ const kahoodTheme = createTheme({
 function Register () {
   const navigate = useNavigate();
 
+  // Submits all data from the textfields into the backend
   const Submit = () => {
     const registerEmail = document.getElementById('register-email').value;
     const registerName = document.getElementById('register-name').value;
@@ -32,6 +33,7 @@ function Register () {
     });
   }
 
+  // Navigates to Login Page
   const LoginPage = () => {
     navigate('/');
   }

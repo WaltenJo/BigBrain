@@ -6,6 +6,7 @@ import apiCall from './ApiCall';
 function NavBar () {
   const navigate = useNavigate();
 
+  // Logout Function
   const Logout = () => {
     apiCall('admin/auth/logout', 'POST', {}, (data) => {
       localStorage.setItem('token', null);

@@ -15,6 +15,10 @@ const kahoodTheme = createTheme({
   }
 })
 
+// Creates an AnswerBox/MultipleChoiceBox given type, required, data
+// type is either A,B,C,D,E,F
+// data : takes in questionData
+// Creates a different coloured box based on type
 function AnswerBox ({ type, required, data }) {
   const [value, setValue] = React.useState('')
   const [selected, setSelected] = React.useState(false);
@@ -65,6 +69,7 @@ function AdminQuizQuestion () {
   const quizId = path.replace(/^\/quiz\/(\d+).*$/, '$1');
   const questionId = path.replace(/.*\/(\d+)$/, '$1')
 
+  // Saves all filled in TextFields and sends it to backend
   const saveQuestion = () => {
     const questionStruct = {
       id: questionId,
@@ -108,6 +113,7 @@ function AdminQuizQuestion () {
     console.log(test);
   }
 
+  // Navigates back to Edit Quiz Page
   const Exit = () => {
     navigate('..');
   }
@@ -116,6 +122,7 @@ function AdminQuizQuestion () {
     setTime(event.target.value);
   };
 
+  // Puts in all values into the TextFields if quiz already exists
   useEffect(() => {
     apiCall('admin/quiz/' + quizId, 'GET', {}, (data) => {
       setQuizData(data);

@@ -6,6 +6,7 @@ import Dashboard from './pages/Dashboard.jsx';
 import AdminEditQuiz from './pages/AdminEditQuiz.jsx';
 import AdminQuizQuestion from './pages/AdminQuizQuestion.jsx';
 import AdminSession from './pages/AdminSession.jsx';
+import PlayerSession from './pages/PlayerSession.jsx';
 
 function App () {
   return (
@@ -19,6 +20,7 @@ function App () {
           <Route path=":questionId" element={<AdminQuizQuestion />} />
         </Route>
         <Route path="/adminSession/:sessionId" element={<AdminSession />} />
+        <Route path="/playerSession/:sessionId" element={<PlayerSession />} />
       </Routes>
     </BrowserRouter>
   );

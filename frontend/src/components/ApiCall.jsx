@@ -1,3 +1,7 @@
+// This is file stores apiCall funtion
+// ApiCall takes in path, method, payload, and success
+// This function will handle token authorization
+
 async function apiCall (path, method, payload, success) {
   const options = {
     method: method,

@@ -17,20 +17,6 @@ const kahoodTheme = createTheme({
   }
 })
 
-/*
-const getQuizLength = (id) => {
-  const [value, setValue] = React.useState('');
-
-  React.useEffect(() => {
-    apiCall('admin/quiz/' + id, 'GET', {}, (data) => {
-      setValue(data.questions.length);
-    })
-  }, [id])
-
-  return value;
-}
-*/
-
 function Dashboard () {
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
@@ -38,6 +24,7 @@ function Dashboard () {
   const [gameEndPopup, setGameEndPopup] = React.useState(false);
   const [sessionId, setSessionId] = React.useState('');
 
+  // Controls Create New Quiz Dialog Box
   const handleOpen = () => {
     setOpen(true);
   }
@@ -46,6 +33,7 @@ function Dashboard () {
     setOpen(false);
   }
 
+  // Controls Start Game Popup Box
   const openGamePopup = (id) => {
     setSessionId(id);
     setGamePopup(true);
@@ -55,6 +43,7 @@ function Dashboard () {
     setGamePopup(false);
   }
 
+  // Controls End Game Popup Box
   const openGameEndPopup = () => {
     setGameEndPopup(true);
   }
@@ -63,6 +52,7 @@ function Dashboard () {
     setGameEndPopup(false);
   }
 
+  // Creates a new Quiz, reference: Create Quiz
   const createNewQuiz = () => {
     const quizName = document.getElementById('quiz-name').value;
 
@@ -76,10 +66,12 @@ function Dashboard () {
     handleClose();
   }
 
+  // Navigates to quiz page
   const quizPage = (quizId) => {
     navigate('../quiz/' + quizId);
   }
 
+  // Starts the session for a quiz given a quizId
   const startGame = (quizId) => {
     apiCall('admin/quiz/' + quizId + '/start', 'POST', {}, (data) => {
       apiCall('admin/quiz/' + quizId, 'GET', {}, (data) => {
@@ -88,12 +80,14 @@ function Dashboard () {
     })
   }
 
+  // Ends the session for a quiz given a quizId
   const endGame = (quizId) => {
     apiCall('admin/quiz/' + quizId + '/end', 'POST', {}, (data) => {
       openGameEndPopup();
     })
   }
 
+  // Loads/Reloads the page, Called when page first loads
   const loadPage = () => {
     apiCall('admin/quiz', 'GET', {}, (data) => {
       const quizFeed = data.quizzes.map((quiz) => {
@@ -126,6 +120,7 @@ function Dashboard () {
   }
   loadPage();
 
+  // Deletes a specific quiz given a quizId
   const deleteQuiz = (quizId) => {
     apiCall('admin/quiz/' + quizId, 'DELETE', {}, (data) => {
       console.log(data);
@@ -141,6 +136,8 @@ function Dashboard () {
         <Box>
           <Button onClick={handleOpen} variant='contained'>Create New Quiz</Button>
         </Box>
+
+        {/* Create New Quiz Dialog */}
         <Dialog open={open} onClose={handleClose}>
           <DialogTitle>
             Create New Quiz
@@ -155,6 +152,8 @@ function Dashboard () {
             <Button onClick={handleClose}>Cancel</Button>
           </DialogActions>
         </Dialog>
+
+        {/* Stores all the quzzes */}
         <Box id='quiz-feed'></Box>
       </ThemeProvider>
 
