@@ -3,16 +3,22 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Register from './pages/Register.jsx';
 import Login from './pages/Login.jsx';
 import Dashboard from './pages/Dashboard.jsx';
-import AdminQuiz from './pages/AdminQuiz.jsx';
+import AdminEditQuiz from './pages/AdminEditQuiz.jsx';
+import AdminQuizQuestion from './pages/AdminQuizQuestion.jsx';
+import AdminSession from './pages/AdminSession.jsx';
 
 function App () {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/quiz/:id" element={<AdminQuiz />} />
+        <Route path="/quiz/:id">
+          <Route path="" element={<AdminEditQuiz />} />
+          <Route path=":questionId" element={<AdminQuizQuestion />} />
+        </Route>
+        <Route path="/adminSession/:sessionId" element={<AdminSession />} />
       </Routes>
     </BrowserRouter>
   );

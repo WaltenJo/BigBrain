@@ -1,4 +1,4 @@
-export const apiCall = (path, method, payload, success) => {
+async function apiCall (path, method, payload, success) {
   const options = {
     method: method,
     headers: {
@@ -14,17 +14,15 @@ export const apiCall = (path, method, payload, success) => {
     options.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
   }
 
-  return fetch('http://localhost:5005/' + path, options)
-    .then((response) => {
-      return response.json()
-        .then((data) => {
-          if (data.error) {
-            alert(data.error);
-          } else {
-            if (success) {
-              return success(data);
-            }
-          }
-        });
-    });
+  const response = await fetch('http://localhost:5005/' + path, options)
+  const data = await response.json();
+  if (data.error) {
+    alert(data.error);
+  } else {
+    if (success) {
+      return success(data);
+    }
+  }
 }
+
+export default apiCall;

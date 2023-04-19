@@ -1,7 +1,7 @@
 import React from 'react';
 import { AppBar, Toolbar, Typography, Button, Link, Box } from '@mui/material'
 import { useNavigate } from 'react-router-dom';
-import { apiCall } from './ApiCall';
+import apiCall from './ApiCall';
 
 function NavBar () {
   const navigate = useNavigate();
@@ -9,7 +9,7 @@ function NavBar () {
   const Logout = () => {
     apiCall('admin/auth/logout', 'POST', {}, (data) => {
       localStorage.setItem('token', null);
-      navigate('/login');
+      navigate('/');
     });
   }
 
